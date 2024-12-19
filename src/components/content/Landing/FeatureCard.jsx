@@ -1,6 +1,8 @@
-import React from 'react'; //自己新增的
+import React from 'react'; 
 import { Card, CardContent, Typography, Box } from '@mui/material';
 import PropTypes from 'prop-types';
+
+// - FeatureCard應用在LandingPage
 
 const FeatureCard = ({ icon: Icon, title, description }) => {
   return (
