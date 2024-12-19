@@ -4,6 +4,10 @@ import Sidebar from './sidebar'
 import Content from './content'
 import Footer from './footer'
 
+// - 處理主要布局
+// - 側邊欄 Sidebar
+// - 內容區 Content
+
 export default function Main() {
   const matches = useMediaQuery('(min-width:900px)')
 

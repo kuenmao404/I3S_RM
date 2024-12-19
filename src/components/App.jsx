@@ -9,6 +9,10 @@ import Dialog from './elements/dialog/Dialog'
 import useAccountStore from '../store/account'
 import useDialogStore from "../store/dialog";
 
+// - 作為主容器
+// - 處理用戶認證狀態
+// - 提供全局組件(Alert, Dialog, Snackbar)
+
 const App = () => {
   const { setAccount, isLogin, name } = useAccountStore(state => state)
   const { ...dialog_props } = useDialogStore()
