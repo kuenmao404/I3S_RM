@@ -3,8 +3,7 @@ import { Button, Box } from '@mui/material'
 import Config from 'Config'
 import SSOButton from './formitem/SSOButton'
 const { apiurl } = Config
-登入重導功能 (handleLogin):
-
+// 登入重導功能 (handleLogin):
 // 當使用者點擊任何一個按鈕時，會呼叫 handleLogin 函式。
 // 此函式接收一個參數 sso，用於指定登入方式（例如 wkesso 或 google）。
 // 函式會構建登入 URL 並將使用者重導至後端 API。
