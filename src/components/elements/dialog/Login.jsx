@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { Button, Box } from '@mui/material'
-import Config from 'Config'
+import config from 'Config'
 import SSOButton from './formitem/SSOButton'
-const { apiurl } = Config
+const { apiurl } = config
 // 登入重導功能 (handleLogin):
 // 當使用者點擊任何一個按鈕時，會呼叫 handleLogin 函式。
 // 此函式接收一個參數 sso，用於指定登入方式（例如 wkesso 或 google）。
@@ -13,7 +13,7 @@ const { apiurl } = Config
 // sso：指定登入方式。
 export default function Login(props) {
   const { state } = props
-
+// onclick="window.location.href='/api/authentication/login'">
   const handleLogin = (sso) => {
     window.location.href = `${apiurl}/api/Auth/login?state=${encodeURIComponent(state)}&sso=${sso}`
   }
