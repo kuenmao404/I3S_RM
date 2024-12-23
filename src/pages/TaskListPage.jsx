@@ -1,13 +1,21 @@
-import React from 'react'
-import { Box, Typography, Paper, Container, Toolbar, useTheme } from '@mui/material'
+import React, { useEffect } from 'react'
+import { Box, Typography, Paper, Container, useTheme } from '@mui/material'
+import { useLocation } from 'react-router-dom'
 import TaskList from '../components/content/tasks/TaskList'
 import useTaskStore from '../store/tasks'
-import useLayoutStore from '../store/layout'
+import useAppStore from '../store/app'
 
 const TaskListPage = () => {
-  const { currentFilter } = useTaskStore()
-  const { isSidebarOpen } = useLayoutStore()
+  const { currentFilter, setFilter } = useTaskStore()
+  const { isSidebarOpen } = useAppStore()
   const theme = useTheme()
+  const location = useLocation()
+
+  useEffect(() => {
+    const path = location.pathname
+    const filter = path.split('/').pop()
+    setFilter(filter)
+  }, [location.pathname, setFilter])
 
   const getFilterTitle = () => {
     switch (currentFilter) {
@@ -16,7 +24,7 @@ const TaskListPage = () => {
       case 'week':
         return '未來七天的任務'
       case 'pending':
-        return '待定任務'
+        return '待定的任務'
       case 'completed':
         return '已完成的任務'
       default:
@@ -28,28 +36,34 @@ const TaskListPage = () => {
     <Box
       sx={{
         backgroundColor: theme.palette.grey[50],
-        minHeight: '100vh',
-        pb: 4,
         display: 'flex',
         flexDirection: 'column',
-        marginLeft: isSidebarOpen ? '240px' : '64px',
-        width: isSidebarOpen ? 'calc(100% - 240px)' : 'calc(100% - 64px)',
-        transition: theme.transitions.create(['margin', 'width'], {
+        position: 'absolute',
+        left: isSidebarOpen ? '240px' : '64px',
+        right: 0,
+        transition: theme.transitions.create(['left'], {
           easing: theme.transitions.easing.easeOut,
           duration: theme.transitions.duration.enteringScreen
         })
       }}
     >
-      <Toolbar />
-      <Container maxWidth="lg" sx={{ flex: 1 }}>
-        <Box sx={{ pt: 3, pb: 4 }}>
+      <Box
+        sx={{
+          flex: 1,
+          display: 'flex',
+          justifyContent: 'center',
+          width: '100%',
+          py: 3
+        }}
+      >
+        <Box sx={{ width: '100%', maxWidth: '900px', px: { xs: 2, sm: 3 } }}>
           <Typography
             variant="h5"
             component="h1"
             sx={{
               fontWeight: 600,
               color: theme.palette.text.primary,
-              mb: 3
+              mb: 1.5
             }}
           >
             {getFilterTitle()}
@@ -59,8 +73,8 @@ const TaskListPage = () => {
             elevation={0}
             sx={{
               borderRadius: 2,
-              border: '1px solid',
-              borderColor: theme.palette.grey[200],
+              border: '2px solid',
+              borderColor: theme.palette.grey[300],
               backgroundColor: 'white',
               overflow: 'hidden'
             }}
@@ -68,7 +82,7 @@ const TaskListPage = () => {
             <TaskList filter={currentFilter} />
           </Paper>
         </Box>
-      </Container>
+      </Box>
     </Box>
   )
 }

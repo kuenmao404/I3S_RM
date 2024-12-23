@@ -2,9 +2,7 @@ import React from 'react'
 import { AppBar, Box, Toolbar, Typography, Button, IconButton } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { Link, useLocation } from 'react-router-dom'
-
 import LoginStateAvator from './LoginStateAvator'
-
 import useAppStore from '../../store/app'
 
 export default function index(props) {
